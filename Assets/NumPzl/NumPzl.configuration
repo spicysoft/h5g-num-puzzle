@@ -5,13 +5,18 @@
     "AssetReferences": [],
     "Entities": [{
         "Components": [{
+            "$type": "NumPzl.GameConfig, NumPzl",
+            "BlockScn": {
+                "SceneGuid": "6823658def0b4403b99ca423e6009d18"
+            }
+        }, {
             "$type": "Unity.Entities.EntityGuid, Unity.Entities",
             "a": 3723641284074160306,
             "b": 12180258061073155211
         }, {
             "$type": "Unity.Tiny.Core2D.DisplayInfo, Unity.Tiny.Core2D",
             "width": 540,
-            "height": 720,
+            "height": 960,
             "autoSizeToFrame": true,
             "orientation": 0,
             "renderMode": 0
@@ -20,6 +25,10 @@
             "Elements": [{
                 "SceneReference": {
                     "SceneGuid": "cecb262ea6464928bc6b08b33c6f9f37"
+                }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "6823658def0b4403b99ca423e6009d18"
                 }
             }]
         }, {
@@ -35,6 +44,8 @@
                 "StableTypeHash": 7960064150805274675
             }, {
                 "StableTypeHash": 12662904853204722592
+            }, {
+                "StableTypeHash": 11906315479517099150
             }]
         }, {
             "$type": "Unity.Authoring.Core.ConfigurationTag, Unity.Authoring.Core"
