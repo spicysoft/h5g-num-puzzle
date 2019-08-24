@@ -38,15 +38,24 @@ namespace NumPzl
 					block.Num = i;
 					EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
 
-					int v = count / 6;
-					int h = count % 6;
+					int v = 0;
+					int h = 0;
+					if( block.IsStayFirst ) {
+						block.Status = BlockSystem.BlkStStay;
+						h = count % 6;
+						v = count / 6;
+					}
+					else {
+						block.Status = BlockSystem.BlkStMove;
+						h = _random.NextInt( 6 );
+						v = 7;
+					}
 					float3 pos = new float3( h * 64, v * 64f, 0 );
 					pos += orgPos;
 
 					block.CellPos.x = h;
 					block.CellPos.y = v;
 					block.NextPos = block.CellPos;
-
 					trans.Value = pos;
 					++count;
 				}

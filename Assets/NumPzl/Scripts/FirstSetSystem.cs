@@ -23,7 +23,7 @@ namespace NumPzl
 				var env = World.TinyEnvironment();
 				SceneReference blockBase = new SceneReference();
 
-				blockBase = env.GetConfigData<GameConfig>().PrefabBlock;
+				blockBase = env.GetConfigData<GameConfig>().PrefabBlockStay;
 
 				//blkEntity = SceneService.LoadSceneAsync( blockBase );
 				SceneService.LoadSceneAsync( blockBase );

@@ -38,6 +38,9 @@ namespace NumPzl
 
 
 			// 盤面情報収集.
+
+
+
 			Entities.ForEach( ( Entity entity, ref BlockInfo block, ref Translation trans ) => {
 				// 状態チェック.
 				//if( !panel.Initialized || panel.Status != PnlStNormal ) {
@@ -46,8 +49,14 @@ namespace NumPzl
 				//}
 
 
+				switch( block.Status ) {
+				case BlkStMove:
+					blockMove( ref entity, ref block, ref trans, mouseOn );
+					break;
+				}
+
 				// マウスとのあたりチェック.
-				if( mouseOn ) {
+				if( mouseOn && block.Status == BlkStMove ) {
 					float2 size = new float2( 64f, 64f );
 
 					float3 mypos = trans.Value;
@@ -60,149 +69,16 @@ namespace NumPzl
 						EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
 					}
 				}
+
 			} );
 
-
-#if false
-			// 盤面情報用配列.
-			NativeArray<int> InfoAry = new NativeArray<int>( 16, Allocator.Temp );
-			bool isPanelHit = false;    // パネルタップしたか?
-			bool isReadyToMove = true;	// パネル動けるか?
-			int2 HitCell = new int2( -1, -1 );
-			int2 BlankCell = new int2( -1, -1 );
-
-			// 盤面情報収集.
-			Entities.ForEach( ( ref PanelInfo panel, ref Translation trans ) => {
-				// 状態チェック.
-				if( !panel.Initialized || panel.Status != PnlStNormal ) {
-					isReadyToMove = false;
-					return;
-				}
-
-				// 情報.
-				int idx = panel.CellPos.x + panel.CellPos.y * 4;
-				InfoAry[idx] = panel.Type;
-
-				// マウスとのあたりチェック.
-				if( mouseOn ) {
-					float2 size = new float2( 128f, 128f );
-
-					float3 mypos = trans.Value;
-					float3 mousePos = inputSystem.GetWorldInputPosition();
-					bool res = OverlapsObjectCollider( mypos, mousePos, size );
-					if( res ) {
-						HitCell = panel.CellPos;
-						isPanelHit = true;
-					}
-				}
-			} );
-
-
-			// パネル動ける状態でない場合.
-			if( !isReadyToMove ) {
-				isPanelHit = false;
-			}
-
-			if( isPanelHit ) {
-				// 入力回数.
-				Entities.ForEach( ( ref GameMngr mngr ) => {
-					++mngr.InputCnt;
-				} );
-				// 空きを探す.
-				for( int j = 0; j < 4; ++j ) {
-					for( int i = 0; i < 4; ++i ) {
-						int idx = i + j * 4;
-						if( InfoAry[idx] == 0 ) {
-							BlankCell.x = i;
-							BlankCell.y = j;
-						}
-					}
-				}
-			}
-
-			// パネル動けるか.
-			bool isMovable = false;
-			int moveDir = -1;	// 0:up 1:down 2:left 3:right.
-			if( HitCell.x == BlankCell.x ) {
-				isMovable = true;
-				if( HitCell.y < BlankCell.y )
-					moveDir = 1;
-				else if( HitCell.y > BlankCell.y )
-					moveDir = 0;
-			}
-			else if ( HitCell.y == BlankCell.y ) {
-				isMovable = true;
-				if( HitCell.x < BlankCell.x )
-					moveDir = 3;
-				else if( HitCell.x > BlankCell.x )
-					moveDir = 2;
-			}
-
-			Entities.ForEach( ( Entity entity, ref PanelInfo panel, ref Translation trans, ref NonUniformScale scale, ref Sprite2DRenderer sprite ) => {
-				if( !panel.Initialized )
-					return;
-
-				switch( panel.Status ) {
-				case PnlStAppear:
-					panelAppear( ref panel, ref sprite );
-					break;
-
-				case PnlStNormal:
-					if( isMovable )
-						panelNormNew( ref panel, ref InfoAry, ref HitCell, ref BlankCell, moveDir );
-					//if( mouseOn ) {
-					//	panelNorm( ref panel, ref trans, ref InfoAry );
-					//}
-					break;
-
-				case PnlStMove:
-					panelMove( ref panel, ref trans );
-					break;
-
-				case PnlStDisappear:
-					if( panelDisapper( ref panel, ref scale, ref sprite ) ) {
-						delEntity = entity;
-					}
-					break;
-				}
-			} );
-
-			InfoAry.Dispose();
-
-			if( delEntity != Entity.Null ) {
-
-				// パネル全消しするかチェック.
-				bool reqReflesh = false;
-				Entities.ForEach( ( ref GameMngr mngr ) => {
-					if( mngr.ReqReflesh ) {
-						mngr.ReqReflesh = false;
-						reqReflesh = true;
-					}
-				} );
-
-				if( reqReflesh ) {
-					// パネル全消し.
-					var env = World.TinyEnvironment();
-					SceneService.UnloadAllSceneInstances( env.GetConfigData<PanelConfig>().PanelRed );
-					SceneService.UnloadAllSceneInstances( env.GetConfigData<PanelConfig>().PanelWhite );
-					// 盤面生成.
-					Entities.ForEach( ( ref PuzzleGen gen ) => {
-						gen.IsGenerate = true;
-					} );
-					setPause( false );
-				}
-				else {
-					// エンティティ削除.
-					SceneService.UnloadSceneInstance( delEntity );
-					// パネル追加.
-					Entities.ForEach( ( ref PuzzleGen gen ) => {
-						gen.IsGenAdditive = true;
-					} );
-					setPause( false );
-				}
-			}
-#endif
 		}
+
+
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, bool mouseOn )
+		{
+		}
+
 #if false
 		bool isPause()
 		{

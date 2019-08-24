@@ -10,7 +10,7 @@
                 "SceneGuid": "6823658def0b4403b99ca423e6009d18"
             },
             "PrefabBlockStay": {
-                "SceneGuid": "6823658def0b4403b99ca423e6009d18"
+                "SceneGuid": "b4a2e4dafbdc4377bc6c41c7319c3176"
             }
         }, {
             "$type": "Unity.Entities.EntityGuid, Unity.Entities",
@@ -32,6 +32,14 @@
             }, {
                 "SceneReference": {
                     "SceneGuid": "6823658def0b4403b99ca423e6009d18"
+                }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "b4a2e4dafbdc4377bc6c41c7319c3176"
+                }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "c9d2c2390ae941db8cf7f0c0d378e141"
                 }
             }]
         }, {
