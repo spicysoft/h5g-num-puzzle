@@ -6,7 +6,10 @@
     "Entities": [{
         "Components": [{
             "$type": "NumPzl.GameConfig, NumPzl",
-            "BlockScn": {
+            "PrefabBlock": {
+                "SceneGuid": "6823658def0b4403b99ca423e6009d18"
+            },
+            "PrefabBlockStay": {
                 "SceneGuid": "6823658def0b4403b99ca423e6009d18"
             }
         }, {
@@ -46,6 +49,8 @@
                 "StableTypeHash": 12662904853204722592
             }, {
                 "StableTypeHash": 11906315479517099150
+            }, {
+                "StableTypeHash": 368670087055490888
             }]
         }, {
             "$type": "Unity.Authoring.Core.ConfigurationTag, Unity.Authoring.Core"

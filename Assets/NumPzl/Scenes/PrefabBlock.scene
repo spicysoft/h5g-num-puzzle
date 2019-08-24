@@ -31,6 +31,7 @@
             "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core"
         }, {
             "$type": "NumPzl.BlockInfo, NumPzl",
+            "IsStayFirst": true,
             "CellPos": {},
             "NextPos": {}
         }, {
@@ -101,6 +102,8 @@
                 "StableTypeHash": 16791256614846730296
             }, {
                 "StableTypeHash": 7660989827100653305
+            }, {
+                "StableTypeHash": 14522766685964194634
             }]
         }]
     }, {

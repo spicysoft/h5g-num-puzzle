@@ -38,8 +38,8 @@ namespace NumPzl
 					block.Num = i;
 					EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
 
-					int v = count / 4;
-					int h = count % 4;
+					int v = count / 6;
+					int h = count % 6;
 					float3 pos = new float3( h * 64, v * 64f, 0 );
 					pos += orgPos;
 

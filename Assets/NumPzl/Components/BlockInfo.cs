@@ -5,7 +5,8 @@ namespace NumPzl
 {
 	public struct BlockInfo : IComponentData
 	{
-		public bool Initialized;	// 初期化したか.
+		public bool Initialized;    // 初期化したか.
+		public bool IsStayFirst;    // 初期状態Stayか.
 		public int2 CellPos;		// 現在のセル単位の位置.
 		public int2 NextPos;        // 移動先セル.
 		public int Num;             // 数値.

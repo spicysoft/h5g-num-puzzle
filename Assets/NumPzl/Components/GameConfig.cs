@@ -5,7 +5,7 @@ namespace NumPzl
 {
 	public struct GameConfig : IComponentData
 	{
-		public SceneReference BlockScn;
-
+		public SceneReference PrefabBlock;
+		public SceneReference PrefabBlockStay;
 	}
 }
