@@ -12,6 +12,7 @@ namespace NumPzl
 {
 	/// <summary>
 	/// パネルの挙動.
+	/// セルは左下が0,0
 	/// </summary>
 	[UpdateAfter( typeof( InitBlockSystem ) )]
 	public class BlockSystem : ComponentSystem
@@ -20,10 +21,6 @@ namespace NumPzl
 		public const int BlkStStay = 1;
 		public const int BlkStMove = 2;
 		public const int BlkStDisappear = 3;
-
-		public const int BlkTypeNone = 0;
-		public const int BlkTypeRed = 1;
-		public const int BlkTypeWhite = 2;
 
 
 		protected override void OnUpdate()
@@ -38,8 +35,28 @@ namespace NumPzl
 
 
 			// 盤面情報収集.
+			// 盤面情報用配列.
+			NativeArray<Entity> infoAry = new NativeArray<Entity>( 6*8, Allocator.Temp );
+			for( int i = 0; i < 6*8; ++i ) {
+				infoAry[i] = Entity.Null;
+			}
 
 
+			Entities.ForEach( ( Entity entity, ref BlockInfo block ) => {
+				if( !block.Initialized ) {
+					return;
+				}
+				// 情報.
+				int idx = block.CellPos.x + block.CellPos.y * 6;
+				infoAry[idx] = entity;
+			} );
+
+
+			NativeArray<Entity> delAry = new NativeArray<Entity>( 3, Allocator.Temp );
+			for( int i = 0; i < 3; ++i ) {
+				delAry[i] = Entity.Null;
+			}
+			int delCnt = 0;
 
 			Entities.ForEach( ( Entity entity, ref BlockInfo block, ref Translation trans ) => {
 				// 状態チェック.
@@ -51,13 +68,18 @@ namespace NumPzl
 
 				switch( block.Status ) {
 				case BlkStMove:
-					blockMove( ref entity, ref block, ref trans, mouseOn );
+					blockMove( ref entity, ref block, ref trans, ref infoAry );
+					break;
+				case BlkStDisappear:
+					delAry[delCnt++] = entity;
 					break;
 				}
 
+				EntityManager.SetBufferFromString<TextString>( entity, block.Status.ToString() );
+#if false
 				// マウスとのあたりチェック.
 				if( mouseOn && block.Status == BlkStMove ) {
-					float2 size = new float2( 64f, 64f );
+					float2 size = new float2( InitBlockSystem.BlkSize, InitBlockSystem.BlkSize );
 
 					float3 mypos = trans.Value;
 					float3 mousePos = inputSystem.GetWorldInputPosition();
@@ -69,14 +91,68 @@ namespace NumPzl
 						EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
 					}
 				}
-
+#endif
 			} );
+
+			infoAry.Dispose();
+
+			for( int i = 0; i < 3; ++i ) {
+				if( delAry[i] != Entity.Null ) {
+					// エンティティ削除.
+					SceneService.UnloadSceneInstance( delAry[i] );
+				}
+			}
+
+			delAry.Dispose();
 
 		}
 
 
-		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, bool mouseOn )
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry )
 		{
+			// 底.
+			int btmY = -1;
+			Entity btmEntity = Entity.Null;
+			for( int j = 0; j < 7; ++j ) {
+				int idx = block.CellPos.x + j * 6;
+				if( infoAry[idx] != Entity.Null ) {
+					BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( infoAry[idx] );
+					if( blk.Status == BlkStStay ) {
+						btmY = j;
+						btmEntity = infoAry[idx];
+					}
+				}
+				else {
+					break;
+				}
+			}
+
+			float dt = World.TinyEnvironment().frameDeltaTime;
+			float3 pos = trans.Value;
+			pos.y -= 100f * dt;
+
+			float tarY = InitBlockSystem.OrgY + InitBlockSystem.BlkSize*(btmY+1);
+			if( pos.y <= tarY ) {
+				pos.y = tarY;
+				block.Status = BlkStStay;
+				if( btmEntity != Entity.Null ) {
+					block.Status = BlkStDisappear;
+
+					//BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( btmEntity );
+					//blk.Status = BlkStDisappear;
+
+					// todo:他の方法があれば変える.
+					Entities.ForEach( ( Entity ent, ref BlockInfo blk ) => {
+						if( ent == btmEntity ) {
+							blk.Status = BlkStDisappear;
+						}
+					} );
+				}
+			}
+
+			block.CellPos.y = (int)( ( pos.y + 0.5f*InitBlockSystem.BlkSize - InitBlockSystem.OrgY ) / InitBlockSystem.BlkSize );
+
+			trans.Value = pos;
 		}
 
 #if false

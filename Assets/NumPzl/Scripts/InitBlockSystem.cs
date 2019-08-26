@@ -16,8 +16,10 @@ namespace NumPzl
 	public class InitBlockSystem : ComponentSystem
 	{
 		Random _random;
-		public const float OrgX = -128f * 2f + 64f;
-		public const float OrgY = -128f * 2f + 64f;
+		public const float BlkSize = 64f;
+		public const float OrgX = -128f * 2f + BlkSize;
+		public const float OrgY = -128f * 2f + BlkSize;
+
 
 		protected override void OnCreate()
 		{
@@ -41,16 +43,19 @@ namespace NumPzl
 					int v = 0;
 					int h = 0;
 					if( block.IsStayFirst ) {
+						// 最初に配置.
 						block.Status = BlockSystem.BlkStStay;
 						h = count % 6;
 						v = count / 6;
 					}
 					else {
+						// 落下ブロック.
 						block.Status = BlockSystem.BlkStMove;
-						h = _random.NextInt( 6 );
+						//h = _random.NextInt( 6 );
+						h = 1;
 						v = 7;
 					}
-					float3 pos = new float3( h * 64, v * 64f, 0 );
+					float3 pos = new float3( h * BlkSize, v * BlkSize, 0 );
 					pos += orgPos;
 
 					block.CellPos.x = h;

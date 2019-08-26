@@ -24,7 +24,8 @@ namespace NumPzl
 
 			bool mouseOn = false;
 			var inputSystem = World.GetExistingSystem<InputSystem>();
-			mouseOn = inputSystem.GetMouseButtonDown( 1 );
+			//mouseOn = inputSystem.GetMouseButtonDown( 0 );
+			mouseOn = inputSystem.GetKeyDown( KeyCode.A );
 			if( mouseOn ) {
 				var env = World.TinyEnvironment();
 				SceneReference blockBase = new SceneReference();
