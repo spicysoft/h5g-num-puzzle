@@ -51,8 +51,8 @@ namespace NumPzl
 					else {
 						// 落下ブロック.
 						block.Status = BlockSystem.BlkStMove;
-						//h = _random.NextInt( 6 );
-						h = 1;
+						h = _random.NextInt( 6 );
+						//h = 1;
 						v = 7;
 					}
 					float3 pos = new float3( h * BlkSize, v * BlkSize, 0 );

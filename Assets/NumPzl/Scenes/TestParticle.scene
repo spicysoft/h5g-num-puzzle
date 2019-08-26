@@ -179,7 +179,7 @@
             "$type": "Unity.Tiny.Particles.ParticleEmitter, Unity.Tiny.Particles",
             "particle": "a45c94f1ff4648098a9f5f7cb1196249",
             "maxParticles": 30,
-            "emitRate": 10,
+            "emitRate": 30,
             "lifetime": {
                 "start": 1,
                 "end": 1
@@ -216,6 +216,14 @@
         }, {
             "$type": "Unity.Tiny.Particles.EmitterInitialRotation, Unity.Tiny.Particles",
             "angle": {}
+        }, {
+            "$type": "Unity.Tiny.Particles.BurstEmission, Unity.Tiny.Particles",
+            "count": {
+                "start": 30,
+                "end": 30
+            },
+            "interval": {},
+            "cycles": 1
         }, {
             "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core",
             "Index": 1
@@ -285,6 +293,8 @@
                 "StableTypeHash": 11302202262524575775
             }, {
                 "StableTypeHash": 3882558208669946638
+            }, {
+                "StableTypeHash": 12120468875983534182
             }]
         }]
     }, {
@@ -427,14 +437,12 @@
             "Elements": [{
                 "value": {
                     "r": 1,
-                    "g": 1,
-                    "b": 1
+                    "a": 1
                 }
             }, {
                 "time": 1,
                 "value": {
-                    "r": 1,
-                    "a": 1
+                    "r": 1
                 }
             }]
         }, {

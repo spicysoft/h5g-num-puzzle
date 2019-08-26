@@ -75,8 +75,8 @@ namespace NumPzl
 					break;
 				}
 
-				EntityManager.SetBufferFromString<TextString>( entity, block.Status.ToString() );
-#if false
+				//EntityManager.SetBufferFromString<TextString>( entity, block.Status.ToString() );
+#if true
 				// マウスとのあたりチェック.
 				if( mouseOn && block.Status == BlkStMove ) {
 					float2 size = new float2( InitBlockSystem.BlkSize, InitBlockSystem.BlkSize );
@@ -134,19 +134,22 @@ namespace NumPzl
 			float tarY = InitBlockSystem.OrgY + InitBlockSystem.BlkSize*(btmY+1);
 			if( pos.y <= tarY ) {
 				pos.y = tarY;
-				block.Status = BlkStStay;
 				if( btmEntity != Entity.Null ) {
-					block.Status = BlkStDisappear;
-
-					//BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( btmEntity );
-					//blk.Status = BlkStDisappear;
-
-					// todo:他の方法があれば変える.
-					Entities.ForEach( ( Entity ent, ref BlockInfo blk ) => {
-						if( ent == btmEntity ) {
-							blk.Status = BlkStDisappear;
-						}
-					} );
+					// 下のブロック.
+					BlockInfo btmBlk = EntityManager.GetComponentData<BlockInfo>( btmEntity );
+					// 数字判定.
+					if( block.Num + btmBlk.Num == 10 ) {
+						block.Status = BlkStDisappear;
+						// 下のブロック書き換え.
+						btmBlk.Status = BlkStDisappear;
+						EntityManager.SetComponentData( btmEntity, btmBlk );
+					}
+					else {
+						block.Status = BlkStStay;
+					}
+				}
+				else {
+					block.Status = BlkStStay;
 				}
 			}
 
