@@ -129,7 +129,7 @@ namespace NumPzl
 
 			float dt = World.TinyEnvironment().frameDeltaTime;
 			float3 pos = trans.Value;
-			pos.y -= 100f * dt;
+			pos.y -= 80f * dt;
 
 			float tarY = InitBlockSystem.OrgY + InitBlockSystem.BlkSize*(btmY+1);
 			if( pos.y <= tarY ) {
