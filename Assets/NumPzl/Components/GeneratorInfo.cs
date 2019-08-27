@@ -6,10 +6,11 @@ namespace NumPzl
 	{
 		public bool Initialized;
 		public bool Request;
-		public float Timer;
-		public float IntvlTime;
-		public float TimeDiferrence;
-		public int GenerateNum;
-		public int Status;
+		public float Timer;				// タイマー.
+		public float IntvlTime;			// インターバル.
+		public float TimeDiferrence;	// 時間差.
+		public int GenerateNum;			// 生成する個数.
+		public int GenCnt;				// 生成した個数.
+		public int Status;				// ステータス.
 	}
 }

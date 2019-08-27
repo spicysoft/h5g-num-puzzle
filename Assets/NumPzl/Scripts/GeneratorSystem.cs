@@ -13,40 +13,6 @@ namespace NumPzl
 
 		protected override void OnUpdate()
 		{
-#if false
-			bool isRequest = false;
-			Entities.ForEach( ( ref GeneratorInfo info ) => {
-				if( info.Request ) {
-					info.Request = false;
-					isRequest = true;
-				}
-			} );
-
-			if( isRequest ) {
-				var env = World.TinyEnvironment();
-				SceneReference blockBase = new SceneReference();
-
-				blockBase = env.GetConfigData<GameConfig>().PrefabBlock;
-
-				SceneService.LoadSceneAsync( blockBase );
-			}
-#endif
-
-#if false
-			bool mouseOn = false;
-			var inputSystem = World.GetExistingSystem<InputSystem>();
-			mouseOn = inputSystem.GetKeyDown( KeyCode.A );
-			if( mouseOn ) {
-				var env = World.TinyEnvironment();
-				SceneReference blockBase = new SceneReference();
-
-				blockBase = env.GetConfigData<GameConfig>().PrefabBlock;
-
-				SceneService.LoadSceneAsync( blockBase );
-
-			}
-#endif
-
 			bool isRequest = false;
 			bool isPause = false;
 			float gameTime = 0;
@@ -61,32 +27,33 @@ namespace NumPzl
 				Entities.ForEach( ( ref GeneratorInfo info ) => {
 					if( !info.Initialized ) {
 						info.Initialized = true;
-						info.IntvlTime = 3f;
+						info.IntvlTime = 2f;
 						info.GenerateNum = 1;
+						info.Timer = 2f;	//
 						return;
 					}
 
 					float dt = World.TinyEnvironment().frameDeltaTime;
 
-					info.Timer += dt;
-					if( info.Timer > info.IntvlTime ) {
-						info.Timer = 0;
-						info.Status = StGenerate;
-						//isRequest = true;
-						CheckGenerateNum( ref info, gameTime );
-						genNum = info.GenerateNum;
+					if( info.Status == StNorm ) {
+						info.Timer += dt;
+						if( info.Timer > info.IntvlTime ) {
+							info.Timer = 0;
+							info.Status = StGenerate;
+							CheckGenerateNum( ref info, gameTime );
+							genNum = info.GenerateNum;
+						}
 					}
-
-					if( info.Status == StGenerate ) {
+					else if( info.Status == StGenerate ) {
 						info.TimeDiferrence -= dt;
 						if( info.TimeDiferrence <= 0 ) {
-							if( info.GenerateNum > 0 ) {
+							if( info.GenCnt < info.GenerateNum ) {
 								isRequest = true;
 								info.TimeDiferrence = 0.6f;
-								--info.GenerateNum;
-							}
-							else {
-								info.Status = StNorm;
+								if( ++info.GenCnt >= info.GenerateNum ) {
+									info.Status = StNorm;
+									info.GenCnt = 0;
+								}
 							}
 						}
 					}
@@ -94,14 +61,11 @@ namespace NumPzl
 
 
 				if( isRequest ) {
+					// ブロック生成.
 					var env = World.TinyEnvironment();
 					SceneReference blockBase = new SceneReference();
-
 					blockBase = env.GetConfigData<GameConfig>().PrefabBlock;
-
-					//for( int i = 0; i < 4/*genNum*/; ++i ) {
-						SceneService.LoadSceneAsync( blockBase );
-					//}
+					SceneService.LoadSceneAsync( blockBase );
 				}
 			}
 		}
@@ -109,13 +73,11 @@ namespace NumPzl
 		// 生成するブロックの数.
 		void CheckGenerateNum( ref GeneratorInfo info, float gameTime )
 		{
-			info.GenerateNum = 3;
-#if false
 			if( gameTime > 60f ) {
 				if( info.GenerateNum == 3 )
 					++info.GenerateNum;
 			}
-			else if( gameTime > 40f ) {
+			if( gameTime > 40f ) {
 				if( info.GenerateNum == 2 )
 					++info.GenerateNum;
 			}
@@ -123,7 +85,6 @@ namespace NumPzl
 				if( info.GenerateNum == 1 )
 					++info.GenerateNum;
 			}
-#endif
 		}
 
 	}

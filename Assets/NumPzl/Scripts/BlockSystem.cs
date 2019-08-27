@@ -33,6 +33,11 @@ namespace NumPzl
 				mouseOn = inputSystem.GetMouseButtonDown( 0 );
 			//}
 
+			// ゲームタイム.
+			float gameTime = 0;
+			Entities.ForEach( ( ref GameMngr mngr ) => {
+				gameTime = mngr.GameTimer;
+			} );
 
 			// 盤面情報収集.
 			// 盤面情報用配列.
@@ -68,7 +73,8 @@ namespace NumPzl
 
 				switch( block.Status ) {
 				case BlkStMove:
-					blockMove( ref entity, ref block, ref trans, ref infoAry );
+					float vel = getBlockVelocity( gameTime );
+					blockMove( ref entity, ref block, ref trans, ref infoAry, vel );
 					break;
 				case BlkStDisappear:
 					delAry[delCnt++] = entity;
@@ -108,7 +114,7 @@ namespace NumPzl
 		}
 
 
-		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry )
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel )
 		{
 			// 底.
 			int btmY = -1;
@@ -129,7 +135,7 @@ namespace NumPzl
 
 			float dt = World.TinyEnvironment().frameDeltaTime;
 			float3 pos = trans.Value;
-			pos.y -= 80f * dt;
+			pos.y -= vel * dt;
 
 			float tarY = InitBlockSystem.OrgY + InitBlockSystem.BlkSize*(btmY+1);
 			if( pos.y <= tarY ) {
@@ -156,6 +162,19 @@ namespace NumPzl
 			block.CellPos.y = (int)( ( pos.y + 0.5f*InitBlockSystem.BlkSize - InitBlockSystem.OrgY ) / InitBlockSystem.BlkSize );
 
 			trans.Value = pos;
+		}
+
+		float getBlockVelocity( float gameTime )
+		{
+			float vel = 60f;
+
+			float t = gameTime / 10f;
+			vel += t * 1.2f;
+
+			if( vel > 80f )
+				vel = 80f;
+
+			return vel;
 		}
 
 #if false
