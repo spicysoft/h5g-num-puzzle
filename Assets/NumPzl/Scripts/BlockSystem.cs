@@ -28,6 +28,16 @@ namespace NumPzl
 			Entity delEntity = Entity.Null;
 			var inputSystem = World.GetExistingSystem<InputSystem>();
 
+			bool IsPause = false;
+			Entities.ForEach( ( ref GameMngr mngr ) => {
+				if( mngr.IsPause ) {
+					IsPause = true;
+				}
+			} );
+			if( IsPause )
+				return;
+
+
 			bool mouseOn = false;
 			//if( !isPause() ) {
 				mouseOn = inputSystem.GetMouseButtonDown( 0 );
@@ -119,7 +129,7 @@ namespace NumPzl
 			// 底.
 			int btmY = -1;
 			Entity btmEntity = Entity.Null;
-			for( int j = 0; j < 7; ++j ) {
+			for( int j = 0; j < 8; ++j ) {
 				int idx = block.CellPos.x + j * 6;
 				if( infoAry[idx] != Entity.Null ) {
 					BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( infoAry[idx] );
@@ -131,6 +141,12 @@ namespace NumPzl
 				else {
 					break;
 				}
+			}
+
+			if( btmY == block.CellPos.y ) {
+				//Debug.LogAlways("GAME OVER");
+				gameOverRequest();
+				return;
 			}
 
 			float dt = World.TinyEnvironment().frameDeltaTime;
@@ -149,6 +165,8 @@ namespace NumPzl
 						// 下のブロック書き換え.
 						btmBlk.Status = BlkStDisappear;
 						EntityManager.SetComponentData( btmEntity, btmBlk );
+						// スコア.
+						addScore();
 					}
 					else {
 						block.Status = BlkStStay;
@@ -175,6 +193,29 @@ namespace NumPzl
 				vel = 80f;
 
 			return vel;
+		}
+
+		void gameOverRequest()
+		{
+			Entities.ForEach( ( ref GameMngr mngr ) => {
+				mngr.IsPause = true;
+				//mngr.ReqGameOver = true;
+			} );
+		}
+
+		void addScore()
+		{
+			int score = 0;
+			Entities.ForEach( ( Entity entity, ref GameMngr mngr ) => {
+				mngr.Score += 100;
+				score = mngr.Score;
+			} );
+
+			if( score != 0 ) {
+				Entities.WithAll<TextScoreTag>().ForEach( ( Entity scoreEntity ) => {
+					EntityManager.SetBufferFromString<TextString>( scoreEntity, score.ToString() );
+				} );
+			}
 		}
 
 #if false

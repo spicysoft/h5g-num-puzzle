@@ -10,7 +10,7 @@ namespace NumPzl
 {
 	public class GameMngrSystem : ComponentSystem
 	{
-		public const float GameTimeLimit = 90f;		// ゲーム時間.
+		public const float GameTimeLimit = 190f;		// ゲーム時間.
 
 		protected override void OnUpdate()
 		{

@@ -32,6 +32,14 @@ namespace NumPzl
 				SceneService.LoadSceneAsync( blockBase );
 				SceneService.LoadSceneAsync( blockBase );
 				SceneService.LoadSceneAsync( blockBase );
+
+				SceneService.LoadSceneAsync( blockBase );
+				SceneService.LoadSceneAsync( blockBase );
+				SceneService.LoadSceneAsync( blockBase );
+				SceneService.LoadSceneAsync( blockBase );
+				SceneService.LoadSceneAsync( blockBase );
+				SceneService.LoadSceneAsync( blockBase );
+
 			}
 
 #if false

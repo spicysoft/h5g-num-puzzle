@@ -29,7 +29,7 @@ namespace NumPzl
 						info.Initialized = true;
 						info.IntvlTime = 2f;
 						info.GenerateNum = 1;
-						info.Timer = 2f;	//
+						info.Timer = 1f;	//
 						return;
 					}
 

@@ -16,8 +16,8 @@ namespace NumPzl
 	public class InitBlockSystem : ComponentSystem
 	{
 		Random _random;
-		public const float BlkSize = 64f;
-		public const float OrgX = -128f * 2f + BlkSize;
+		public const float BlkSize = 80f;
+		public const float OrgX = -BlkSize * 3f + 0.5f * BlkSize;
 		public const float OrgY = -128f * 2f + BlkSize;
 		private int preIdx;
 
@@ -31,6 +31,35 @@ namespace NumPzl
 		{
 			int count = 0;
 			float3 orgPos = new float3( OrgX, OrgY, 0 );
+
+			// 初期配置ブロック待ち.
+			bool isInitialized = false;
+			Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
+				isInitialized = info.Initialized;
+			} );
+
+			if( !isInitialized ) {
+#if true
+				int blkNum = 0;
+				Entities.ForEach( ( Entity entity, ref BlockInfo block ) => {
+					++blkNum;
+				} );
+
+				if( blkNum < 12 ) {
+					return;
+				}
+#endif
+				Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
+					info.Initialized = true;
+				} );
+
+				// 乱数シードセット.
+				uint val = (uint)(World.TinyEnvironment().frameTime * 100f);
+				Debug.LogFormatAlways( "seed {0}", (int)val);
+				_random.InitState( val );
+			}
+
+
 
 			Entities.ForEach( ( Entity entity, ref BlockInfo block, ref Translation trans ) => {
 				if( !block.Initialized ) {
