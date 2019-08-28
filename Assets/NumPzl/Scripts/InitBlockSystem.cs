@@ -18,7 +18,9 @@ namespace NumPzl
 		Random _random;
 		public const float BlkSize = 80f;
 		public const float OrgX = -BlkSize * 3f + 0.5f * BlkSize;
-		public const float OrgY = -128f * 2f + BlkSize;
+		public const float OrgY = -BlkSize * 3f + 0.5f * BlkSize - 64f;
+		public const int BlkVNum = 7;
+
 		private int preIdx;
 
 		protected override void OnCreate()
@@ -32,23 +34,22 @@ namespace NumPzl
 			int count = 0;
 			float3 orgPos = new float3( OrgX, OrgY, 0 );
 
-			// 初期配置ブロック待ち.
+			// 初期配置ブロック, Entity作成待ち.
 			bool isInitialized = false;
 			Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
 				isInitialized = info.Initialized;
 			} );
 
 			if( !isInitialized ) {
-#if true
 				int blkNum = 0;
 				Entities.ForEach( ( Entity entity, ref BlockInfo block ) => {
 					++blkNum;
 				} );
 
-				if( blkNum < 12 ) {
+				if( blkNum < FirstSetSystem.FirstBlockNum ) {
 					return;
 				}
-#endif
+
 				Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
 					info.Initialized = true;
 				} );
@@ -65,8 +66,8 @@ namespace NumPzl
 				if( !block.Initialized ) {
 					block.Initialized = true;
 
-					int i = _random.NextInt( 9 ) + 1;
-					block.Num = i;
+					int no = _random.NextInt( 9 ) + 1;
+					block.Num = no;
 					EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
 
 					int v = 0;
@@ -79,7 +80,7 @@ namespace NumPzl
 					}
 					else {
 						// 落下ブロック.
-						block.Status = BlockSystem.BlkStMove;
+						block.Status = BlockSystem.BlkStPrepare;
 						int rnd = _random.NextInt( 6 );     // 0 ~ 5.
 						if( rnd == preIdx ) {
 							if( ++rnd >= 6 )
@@ -87,7 +88,8 @@ namespace NumPzl
 						}
 						preIdx = rnd;
 						h = rnd;
-						v = 7;
+						//h = 1;
+						v = BlkVNum;
 					}
 					float3 pos = new float3( h * BlkSize, v * BlkSize, 0 );
 					pos += orgPos;

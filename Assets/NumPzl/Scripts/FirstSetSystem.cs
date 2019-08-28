@@ -7,6 +7,7 @@ namespace NumPzl
 {
 	public class FirstSetSystem : ComponentSystem
 	{
+		public const int FirstBlockNum = 12;
 		protected override void OnUpdate()
 		{
 			bool isGenerate = false;
@@ -26,20 +27,10 @@ namespace NumPzl
 				blockBase = env.GetConfigData<GameConfig>().PrefabBlockStay;
 
 				//blkEntity = SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
 
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-				SceneService.LoadSceneAsync( blockBase );
-
+				for( int i = 0; i < FirstBlockNum; ++i ) {
+					SceneService.LoadSceneAsync( blockBase );
+				}
 			}
 
 #if false

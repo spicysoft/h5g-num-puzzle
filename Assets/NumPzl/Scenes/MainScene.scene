@@ -614,7 +614,9 @@
             "b": 13386635830656280138
         }, {
             "$type": "Unity.Tiny.Core2D.Translation, Unity.Tiny.Core2D",
-            "Value": {}
+            "Value": {
+                "y": -64
+            }
         }, {
             "$type": "Unity.Tiny.Core2D.Rotation, Unity.Tiny.Core2D",
             "Value": {

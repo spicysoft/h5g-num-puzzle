@@ -19,8 +19,10 @@ namespace NumPzl
 	{
 		public const int BlkStAppear = 0;
 		public const int BlkStStay = 1;
-		public const int BlkStMove = 2;
-		public const int BlkStDisappear = 3;
+		public const int BlkStPrepare = 2;	// 準備.
+		public const int BlkStMove = 3;
+		public const int BlkStDisappear = 4;
+		public const int BlkStEnd = 5;
 
 
 		protected override void OnUpdate()
@@ -82,12 +84,19 @@ namespace NumPzl
 
 
 				switch( block.Status ) {
+				case BlkStPrepare:
+					prepareMove( ref entity, ref block, ref trans, ref infoAry );
+					break;
 				case BlkStMove:
 					float vel = getBlockVelocity( gameTime );
 					blockMove( ref entity, ref block, ref trans, ref infoAry, vel );
 					break;
 				case BlkStDisappear:
-					delAry[delCnt++] = entity;
+					block.Timer += World.TinyEnvironment().frameDeltaTime;
+					if( block.Timer > 0.2f ) {
+						delAry[delCnt++] = entity;
+						block.Status = BlkStEnd;
+					}
 					break;
 				}
 
@@ -123,13 +132,11 @@ namespace NumPzl
 
 		}
 
-
-		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel )
+		void prepareMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry )
 		{
-			// 底.
 			int btmY = -1;
 			Entity btmEntity = Entity.Null;
-			for( int j = 0; j < 8; ++j ) {
+			for( int j = 0; j < 7; ++j ) {
 				int idx = block.CellPos.x + j * 6;
 				if( infoAry[idx] != Entity.Null ) {
 					BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( infoAry[idx] );
@@ -143,11 +150,53 @@ namespace NumPzl
 				}
 			}
 
-			if( btmY == block.CellPos.y ) {
+			if( btmY == block.CellPos.y - 1 ) {
+				// 下のブロック.
+				BlockInfo btmBlk = EntityManager.GetComponentData<BlockInfo>( btmEntity );
+				if( block.Num + btmBlk.Num != 10 ) {
+					gameOverRequest();
+					Debug.LogAlways("GAME OVER");
+				}
+				else {
+					// 消す.
+					block.Status = BlkStDisappear;
+					// 下のブロック書き換え.
+					btmBlk.Status = BlkStDisappear;
+					EntityManager.SetComponentData( btmEntity, btmBlk );
+					// スコア.
+					addScore();
+				}
+			}
+			else {
+				block.Status = BlkStMove;
+			}
+		}
+
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel )
+		{
+			// 底.
+			int btmY = -1;
+			Entity btmEntity = Entity.Null;
+			for( int j = 0; j < InitBlockSystem.BlkVNum; ++j ) {
+				int idx = block.CellPos.x + j * 6;
+				if( infoAry[idx] != Entity.Null ) {
+					BlockInfo blk = EntityManager.GetComponentData<BlockInfo>( infoAry[idx] );
+					if( blk.Status == BlkStStay ) {
+						btmY = j;
+						btmEntity = infoAry[idx];
+					}
+				}
+				else {
+					break;
+				}
+			}
+
+
+			/*if( btmY == block.CellPos.y ) {
 				//Debug.LogAlways("GAME OVER");
 				gameOverRequest();
 				return;
-			}
+			}*/
 
 			float dt = World.TinyEnvironment().frameDeltaTime;
 			float3 pos = trans.Value;

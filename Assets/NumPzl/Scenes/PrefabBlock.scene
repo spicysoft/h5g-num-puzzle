@@ -4,7 +4,7 @@
     "SerializedVersion": 1,
     "AssetReferences": [
         { "Guid": "2acd61d1f33a246048b168400660b2c7", "FileId": 11400000, "Type": 2},
-        { "Guid": "67539e26977c84fc79055061cdd8e549", "FileId": 21300000, "Type": 3}],
+        { "Guid": "a9f51e346c8024ac790caa6e414611b0", "FileId": 21300000, "Type": 3}],
     "Entities": [{
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
@@ -111,7 +111,7 @@
             "Value": "788942b035194e29b897b631c73a1c92"
         }, {
             "$type": "Unity.Tiny.Core2D.Sprite2DRenderer, Unity.Tiny.Sprite2D",
-            "sprite": "2a78b180cea35e749315f9a921c4b723",
+            "sprite": "6dc9e785d2484e1038d84a04c51ccdb1",
             "color": {
                 "r": 1,
                 "g": 1,
