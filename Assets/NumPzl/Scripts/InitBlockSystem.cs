@@ -21,8 +21,6 @@ namespace NumPzl
 		public const float OrgY = -BlkSize * 3f + 0.5f * BlkSize - 64f;
 		public const int BlkVNum = 7;
 
-		private int preIdx;
-
 		protected override void OnCreate()
 		{
 			_random = new Random();
@@ -33,11 +31,14 @@ namespace NumPzl
 		{
 			int count = 0;
 			float3 orgPos = new float3( OrgX, OrgY, 0 );
+			int preIdx = 0;     // 前回セットしたインデックス.
+			bool preIdxUpdated = false;		// preIdx更新したか?
 
 			// 初期配置ブロック, Entity作成待ち.
 			bool isInitialized = false;
 			Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
 				isInitialized = info.Initialized;
+				preIdx = info.PreIdx;
 			} );
 
 			if( !isInitialized ) {
@@ -55,7 +56,7 @@ namespace NumPzl
 				} );
 
 				// 乱数シードセット.
-				uint val = (uint)(World.TinyEnvironment().frameTime * 100f);
+				uint val = (uint)(World.TinyEnvironment().frameTime * 1000f);
 				Debug.LogFormatAlways( "seed {0}", (int)val);
 				_random.InitState( val );
 			}
@@ -87,6 +88,7 @@ namespace NumPzl
 								rnd = 0;
 						}
 						preIdx = rnd;
+						preIdxUpdated = true;
 						h = rnd;
 						//h = 1;
 						v = BlkVNum;
@@ -102,6 +104,12 @@ namespace NumPzl
 				}
 			} );
 
+			// preIdx更新.
+			if( preIdxUpdated ) {
+				Entities.ForEach( ( Entity entity, ref InitBlockInfo info ) => {
+					info.PreIdx = preIdx;
+				} );
+			}
 		}
 
 	}

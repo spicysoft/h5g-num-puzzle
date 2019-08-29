@@ -248,7 +248,7 @@ namespace NumPzl
 		{
 			Entities.ForEach( ( ref GameMngr mngr ) => {
 				mngr.IsPause = true;
-				//mngr.ReqGameOver = true;
+				mngr.ReqGameOver = true;
 			} );
 		}
 

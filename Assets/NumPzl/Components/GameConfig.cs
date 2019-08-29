@@ -7,5 +7,7 @@ namespace NumPzl
 	{
 		public SceneReference PrefabBlock;
 		public SceneReference PrefabBlockStay;
+		public SceneReference GameOverScn;
+		public SceneReference ResultScn;
 	}
 }

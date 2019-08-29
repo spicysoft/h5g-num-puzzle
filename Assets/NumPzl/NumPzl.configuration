@@ -11,6 +11,12 @@
             },
             "PrefabBlockStay": {
                 "SceneGuid": "b4a2e4dafbdc4377bc6c41c7319c3176"
+            },
+            "GameOverScn": {
+                "SceneGuid": "90f2c4ecb95b4c708f960021f690b051"
+            },
+            "ResultScn": {
+                "SceneGuid": "b4e333e426a74fd989b7f0dc8e1f7a02"
             }
         }, {
             "$type": "Unity.Entities.EntityGuid, Unity.Entities",
@@ -41,6 +47,14 @@
                 "SceneReference": {
                     "SceneGuid": "c9d2c2390ae941db8cf7f0c0d378e141"
                 }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "90f2c4ecb95b4c708f960021f690b051"
+                }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "b4e333e426a74fd989b7f0dc8e1f7a02"
+                }
             }]
         }, {
             "$type": "Unity.Tiny.Scenes.StartupScenes, Unity.Tiny.Scenes",
@@ -59,6 +73,8 @@
                 "StableTypeHash": 11906315479517099150
             }, {
                 "StableTypeHash": 368670087055490888
+            }, {
+                "StableTypeHash": 6957795315310330011
             }]
         }, {
             "$type": "Unity.Authoring.Core.ConfigurationTag, Unity.Authoring.Core"
