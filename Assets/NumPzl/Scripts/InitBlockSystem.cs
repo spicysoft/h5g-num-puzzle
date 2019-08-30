@@ -89,8 +89,8 @@ namespace NumPzl
 						}
 						preIdx = rnd;
 						preIdxUpdated = true;
-						h = rnd;
-						//h = 1;
+						//h = rnd;
+						h = 1;
 						v = BlkVNum;
 					}
 					float3 pos = new float3( h * BlkSize, v * BlkSize, 0 );

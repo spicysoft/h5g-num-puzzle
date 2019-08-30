@@ -13,7 +13,8 @@
             "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core",
             "Index": 4
         }, {
-            "$type": "NumPzl.GameMngr, NumPzl"
+            "$type": "NumPzl.GameMngr, NumPzl",
+            "IsPause": true
         }, {
             "$type": "Unity.Entities.EntityGuid, Unity.Entities",
             "a": 1718690779618232233,

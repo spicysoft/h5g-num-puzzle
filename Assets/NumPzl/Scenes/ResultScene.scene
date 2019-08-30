@@ -18,21 +18,6 @@
             "a": 519828992007752140,
             "b": 12264809424051371480
         }, {
-            "$type": "Unity.Tiny.Core2D.Translation, Unity.Tiny.Core2D",
-            "Value": {}
-        }, {
-            "$type": "Unity.Tiny.Core2D.Rotation, Unity.Tiny.Core2D",
-            "Value": {
-                "value": {}
-            }
-        }, {
-            "$type": "Unity.Tiny.Core2D.NonUniformScale, Unity.Tiny.Core2D",
-            "Value": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            }
-        }, {
             "$type": "Unity.Tiny.Core.EntityName, Unity.Tiny.Core",
             "Elements": [{
                 "c": "R"
@@ -61,12 +46,6 @@
                 "StableTypeHash": 793987765392955020
             }, {
                 "StableTypeHash": 12662904853204722592
-            }, {
-                "StableTypeHash": 266869500686333426
-            }, {
-                "StableTypeHash": 9104342357061045742
-            }, {
-                "StableTypeHash": 17378348762221180850
             }, {
                 "StableTypeHash": 874803706151837934
             }, {
@@ -191,7 +170,11 @@
                 "StableTypeHash": 147127668789581756
             }, {
                 "StableTypeHash": 5378123052767168278
+            }, {
+                "StableTypeHash": 7339547404669417897
             }]
+        }, {
+            "$type": "NumPzl.BtnRetryTag, NumPzl"
         }]
     }, {
         "Components": [{
@@ -1025,7 +1008,11 @@
                 "StableTypeHash": 17649336122499667438
             }, {
                 "StableTypeHash": 15392216118221209652
+            }, {
+                "StableTypeHash": 11050201625606510861
             }]
+        }, {
+            "$type": "NumPzl.TextResultScoreTag, NumPzl"
         }]
     }]
 }

@@ -10,6 +10,9 @@ namespace NumPzl
 	{
 		public const int StNorm = 0;
 		public const int StGenerate = 1;
+		public const float IntervalTime = 2f;
+		public const float TimeForAdjust = 1f;  // 調整用.
+		public const float GenTimeDifference = 0.6f;	// ブロック連続生成の時間差.
 
 		protected override void OnUpdate()
 		{
@@ -27,9 +30,9 @@ namespace NumPzl
 				Entities.ForEach( ( ref GeneratorInfo info ) => {
 					if( !info.Initialized ) {
 						info.Initialized = true;
-						info.IntvlTime = 2f;
+						info.IntvlTime = IntervalTime;
 						info.GenerateNum = 1;
-						info.Timer = 1f;	//
+						info.Timer = TimeForAdjust;
 						return;
 					}
 
@@ -45,11 +48,11 @@ namespace NumPzl
 						}
 					}
 					else if( info.Status == StGenerate ) {
-						info.TimeDiferrence -= dt;
-						if( info.TimeDiferrence <= 0 ) {
+						info.TimeDifference -= dt;
+						if( info.TimeDifference <= 0 ) {
 							if( info.GenCnt < info.GenerateNum ) {
 								isRequest = true;
-								info.TimeDiferrence = 0.6f;
+								info.TimeDifference = GenTimeDifference;
 								if( ++info.GenCnt >= info.GenerateNum ) {
 									info.Status = StNorm;
 									info.GenCnt = 0;
