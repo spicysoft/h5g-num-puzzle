@@ -6,6 +6,9 @@ using Unity.Tiny.Scenes;
 
 namespace NumPzl
 {
+	/// <summary>
+	/// 落ちてくるブロック生成.
+	/// </summary>
 	public class GeneratorSystem : ComponentSystem
 	{
 		public const int StNorm = 0;
@@ -29,10 +32,13 @@ namespace NumPzl
 
 				Entities.ForEach( ( ref GeneratorInfo info ) => {
 					if( !info.Initialized ) {
+						// 初期化.
 						info.Initialized = true;
 						info.IntvlTime = IntervalTime;
 						info.GenerateNum = 1;
 						info.Timer = TimeForAdjust;
+						info.GenCnt = 0;
+						info.Status = StNorm;
 						return;
 					}
 
@@ -43,11 +49,13 @@ namespace NumPzl
 						if( info.Timer > info.IntvlTime ) {
 							info.Timer = 0;
 							info.Status = StGenerate;
+							info.GenCnt = 0;
 							CheckGenerateNum( ref info, gameTime );
 							genNum = info.GenerateNum;
 						}
 					}
 					else if( info.Status == StGenerate ) {
+						// 連続的に生成.
 						info.TimeDifference -= dt;
 						if( info.TimeDifference <= 0 ) {
 							if( info.GenCnt < info.GenerateNum ) {

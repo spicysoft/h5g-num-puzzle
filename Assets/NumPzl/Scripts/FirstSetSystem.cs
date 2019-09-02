@@ -7,7 +7,7 @@ namespace NumPzl
 {
 	public class FirstSetSystem : ComponentSystem
 	{
-		public const int FirstBlockNum = 12;
+		public const int FirstBlockNum = 6;
 		protected override void OnUpdate()
 		{
 			bool isGenerate = false;

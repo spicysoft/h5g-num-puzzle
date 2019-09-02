@@ -3,7 +3,7 @@
     "Guid": "b4a2e4dafbdc4377bc6c41c7319c3176",
     "SerializedVersion": 1,
     "AssetReferences": [
-        { "Guid": "a9f51e346c8024ac790caa6e414611b0", "FileId": 21300000, "Type": 3},
+        { "Guid": "f03073d232160459683e73d0e2435679", "FileId": 21300000, "Type": 3},
         { "Guid": "04caaa0ed4da34cd3b899f6e48d9d13d", "FileId": 11400000, "Type": 2}],
     "Entities": [{
         "Components": [{
@@ -11,7 +11,7 @@
             "Value": "b03c9173699b4eada0ad210ed87088ae"
         }, {
             "$type": "Unity.Tiny.Core2D.Sprite2DRenderer, Unity.Tiny.Sprite2D",
-            "sprite": "6dc9e785d2484e1038d84a04c51ccdb1",
+            "sprite": "b6b5ac75cc7538b6e1cfdc5bed88c22e",
             "color": {
                 "r": 1,
                 "g": 1,
@@ -44,7 +44,7 @@
             }
         }, {
             "$type": "Unity.Tiny.Core2D.LayerSorting, Unity.Tiny.Core2D",
-            "order": 1
+            "order": 4
         }, {
             "$type": "Unity.Tiny.Core.EntityName, Unity.Tiny.Core",
             "Elements": [{
@@ -138,7 +138,7 @@
             }
         }, {
             "$type": "Unity.Tiny.Core2D.LayerSorting, Unity.Tiny.Core2D",
-            "order": 2
+            "order": 5
         }, {
             "$type": "Unity.Tiny.Text.TextString, Unity.Tiny.Text",
             "Elements": [{
