@@ -18,7 +18,7 @@ namespace NumPzl
 			bool btnOn = false;
 			Entities.WithAll<BtnRetryTag>().ForEach( ( Entity entity, ref PointerInteraction pointerInteraction ) => {
 				if( pointerInteraction.clicked ) {
-					Debug.LogAlways("btn ret click");
+					//Debug.LogAlways("btn ret click");
 					btnOn = true;
 				}
 			} );
@@ -28,6 +28,7 @@ namespace NumPzl
 				var env = World.TinyEnvironment();
 				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlock );
 				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlockStay );
+				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabStar );
 
 				//SceneReference scn = new SceneReference();
 				//scn = env.GetConfigData<GameConfig>().ResultScn;

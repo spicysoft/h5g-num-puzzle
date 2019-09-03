@@ -99,7 +99,7 @@ namespace NumPzl
 			}
 #endif
 
-#if true
+#if false
 			// タイマー表示.
 			if( !isPause ) {
 				Entities.WithAll<TextTimerTag>().ForEach( ( Entity entity ) => {

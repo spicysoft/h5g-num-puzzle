@@ -12,6 +12,9 @@
             "PrefabBlockStay": {
                 "SceneGuid": "b4a2e4dafbdc4377bc6c41c7319c3176"
             },
+            "PrefabStar": {
+                "SceneGuid": "6e822737281040f59d6080cd055eb3f3"
+            },
             "TitleScn": {
                 "SceneGuid": "d1595541505349d584498199c8569f7d"
             },
@@ -62,6 +65,10 @@
                 "SceneReference": {
                     "SceneGuid": "d1595541505349d584498199c8569f7d"
                 }
+            }, {
+                "SceneReference": {
+                    "SceneGuid": "6e822737281040f59d6080cd055eb3f3"
+                }
             }]
         }, {
             "$type": "Unity.Tiny.Scenes.StartupScenes, Unity.Tiny.Scenes",
@@ -88,6 +95,8 @@
                 "StableTypeHash": 6957795315310330011
             }, {
                 "StableTypeHash": 3286055313071308930
+            }, {
+                "StableTypeHash": 15290041587007390392
             }]
         }, {
             "$type": "Unity.Authoring.Core.ConfigurationTag, Unity.Authoring.Core"

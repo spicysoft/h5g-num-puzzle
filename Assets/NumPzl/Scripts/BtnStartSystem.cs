@@ -14,7 +14,7 @@ namespace NumPzl
 			bool btnOn = false;
 			Entities.WithAll<BtnStartTag>().ForEach( ( Entity entity, ref PointerInteraction pointerInteraction ) => {
 				if( pointerInteraction.clicked ) {
-					Debug.LogAlways( "btn ret click" );
+					//Debug.LogAlways( "btn ret click" );
 					btnOn = true;
 				}
 			} );

@@ -69,11 +69,12 @@ namespace NumPzl
 			} );
 
 
-			NativeArray<Entity> delAry = new NativeArray<Entity>( 3, Allocator.Temp );
-			for( int i = 0; i < 3; ++i ) {
+			NativeArray<Entity> delAry = new NativeArray<Entity>( 6, Allocator.Temp );
+			for( int i = 0; i < 6; ++i ) {
 				delAry[i] = Entity.Null;
 			}
 			int delCnt = 0;
+			bool effReq = false;	// effect.
 
 			Entities.ForEach( ( Entity entity, ref BlockInfo block, ref Translation trans ) => {
 				// 状態チェック.
@@ -89,13 +90,23 @@ namespace NumPzl
 					break;
 				case BlkStMove:
 					float vel = getBlockVelocity( gameTime );
-					blockMove( ref entity, ref block, ref trans, ref infoAry, vel );
+					blockMove( ref entity, ref block, ref trans, ref infoAry, vel, ref effReq );
 					break;
 				case BlkStDisappear:
 					block.Timer += World.TinyEnvironment().frameDeltaTime;
 					if( block.Timer > 0.2f ) {
 						delAry[delCnt++] = entity;
 						block.Status = BlkStEnd;
+
+						float3 effpos = trans.Value;
+
+						// エフェクト.
+						Entities.ForEach( ( ref EffStarMngr mngr ) => {
+							mngr.Requested = true;
+							mngr.xpos = effpos.x;
+							mngr.ypos = effpos.y;
+						} );
+
 					}
 					break;
 				}
@@ -110,7 +121,7 @@ namespace NumPzl
 					float3 mousePos = inputSystem.GetWorldInputPosition();
 					bool res = OverlapsObjectCollider( mypos, mousePos, size );
 					if( res ) {
-						Debug.LogAlways( "hit" );
+						//Debug.LogAlways( "hit" );
 						if( ++block.Num > 9 )
 							block.Num = 1;
 						EntityManager.SetBufferFromString<TextString>( entity, block.Num.ToString() );
@@ -121,14 +132,24 @@ namespace NumPzl
 
 			infoAry.Dispose();
 
-			for( int i = 0; i < 3; ++i ) {
+			for( int i = 0; i < 6; ++i ) {
 				if( delAry[i] != Entity.Null ) {
 					// エンティティ削除.
 					SceneService.UnloadSceneInstance( delAry[i] );
+
+					// effect test. -> addscoreのところで呼ぶ
+					//var env = World.TinyEnvironment();
+					//SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabStar );
+
 				}
 			}
 
 			delAry.Dispose();
+
+			if( effReq ) {
+				var env = World.TinyEnvironment();
+				SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabStar );
+			}
 
 		}
 
@@ -172,7 +193,7 @@ namespace NumPzl
 			}
 		}
 
-		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel )
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel, ref bool effReq )
 		{
 			// 底.
 			int btmY = -1;
@@ -216,6 +237,8 @@ namespace NumPzl
 						EntityManager.SetComponentData( btmEntity, btmBlk );
 						// スコア.
 						addScore();
+
+						effReq = true;
 					}
 					else {
 						block.Status = BlkStStay;

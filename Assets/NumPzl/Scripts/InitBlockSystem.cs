@@ -18,7 +18,7 @@ namespace NumPzl
 		Random _random;
 		public const float BlkSize = 80f;
 		public const float OrgX = -BlkSize * 3f + 0.5f * BlkSize;
-		public const float OrgY = -BlkSize * 3f + 0.5f * BlkSize - 64f;
+		public const float OrgY = -BlkSize * 3f + 0.5f * BlkSize;
 		public const int BlkVNum = 7;
 
 		protected override void OnCreate()
