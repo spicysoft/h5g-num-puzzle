@@ -16,7 +16,7 @@ namespace NumPzl
 	public class InitBlockSystem : ComponentSystem
 	{
 		Random _random;
-		public const float BlkSize = 80f;
+		public const float BlkSize = 82f;
 		public const float OrgX = -BlkSize * 3f + 0.5f * BlkSize;
 		public const float OrgY = -BlkSize * 3f + 0.5f * BlkSize;
 		public const int BlkVNum = 7;
@@ -89,8 +89,8 @@ namespace NumPzl
 						}
 						preIdx = rnd;
 						preIdxUpdated = true;
-						//h = rnd;
-						h = 1;
+						h = rnd;
+						//h = 1;
 						v = BlkVNum;
 					}
 					float3 pos = new float3( h * BlkSize, v * BlkSize, 0 );

@@ -74,7 +74,7 @@ namespace NumPzl
 				delAry[i] = Entity.Null;
 			}
 			int delCnt = 0;
-			bool effReq = false;	// effect.
+			int effReqCnt = 0;		// エフェクトリクエスト数.
 
 			Entities.ForEach( ( Entity entity, ref BlockInfo block, ref Translation trans ) => {
 				// 状態チェック.
@@ -90,7 +90,7 @@ namespace NumPzl
 					break;
 				case BlkStMove:
 					float vel = getBlockVelocity( gameTime );
-					blockMove( ref entity, ref block, ref trans, ref infoAry, vel, ref effReq );
+					blockMove( ref entity, ref block, ref trans, ref infoAry, vel, ref effReqCnt );
 					break;
 				case BlkStDisappear:
 					block.Timer += World.TinyEnvironment().frameDeltaTime;
@@ -99,14 +99,14 @@ namespace NumPzl
 						block.Status = BlkStEnd;
 
 						float3 effpos = trans.Value;
-
+						/*
 						// エフェクト.
 						Entities.ForEach( ( ref EffStarMngr mngr ) => {
 							mngr.Requested = true;
 							mngr.xpos = effpos.x;
 							mngr.ypos = effpos.y;
 						} );
-
+						*/
 					}
 					break;
 				}
@@ -132,22 +132,18 @@ namespace NumPzl
 
 			infoAry.Dispose();
 
+			// ブロック削除.
 			for( int i = 0; i < 6; ++i ) {
 				if( delAry[i] != Entity.Null ) {
 					// エンティティ削除.
 					SceneService.UnloadSceneInstance( delAry[i] );
-
-					// effect test. -> addscoreのところで呼ぶ
-					//var env = World.TinyEnvironment();
-					//SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabStar );
-
 				}
 			}
-
 			delAry.Dispose();
 
-			if( effReq ) {
-				var env = World.TinyEnvironment();
+			// エフェクト生成.
+			var env = World.TinyEnvironment();
+			for( int i = 0; i < effReqCnt; ++i ) {
 				SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabStar );
 			}
 
@@ -155,6 +151,7 @@ namespace NumPzl
 
 		void prepareMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry )
 		{
+			// 底.
 			int btmY = -1;
 			Entity btmEntity = Entity.Null;
 			for( int j = 0; j < 7; ++j ) {
@@ -171,7 +168,7 @@ namespace NumPzl
 				}
 			}
 
-			if( btmY == block.CellPos.y - 1 ) {
+			if( btmY == block.CellPos.y - 1 ) {		// てっぺん?
 				// 下のブロック.
 				BlockInfo btmBlk = EntityManager.GetComponentData<BlockInfo>( btmEntity );
 				if( block.Num + btmBlk.Num != 10 ) {
@@ -193,7 +190,7 @@ namespace NumPzl
 			}
 		}
 
-		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel, ref bool effReq )
+		void blockMove( ref Entity entity, ref BlockInfo block, ref Translation trans, ref NativeArray<Entity> infoAry, float vel, ref int effReqCnt )
 		{
 			// 底.
 			int btmY = -1;
@@ -234,11 +231,12 @@ namespace NumPzl
 						block.Status = BlkStDisappear;
 						// 下のブロック書き換え.
 						btmBlk.Status = BlkStDisappear;
-						EntityManager.SetComponentData( btmEntity, btmBlk );
 						// スコア.
 						addScore();
-
-						effReq = true;
+						// エフェクトリクエスト.
+						++effReqCnt;
+						btmBlk.EffGen = true;
+						EntityManager.SetComponentData( btmEntity, btmBlk );	// コンポーネント更新.
 					}
 					else {
 						block.Status = BlkStStay;

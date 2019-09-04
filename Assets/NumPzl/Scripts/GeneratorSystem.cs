@@ -15,7 +15,7 @@ namespace NumPzl
 		public const int StGenerate = 1;
 		public const float IntervalTime = 2f;
 		public const float TimeForAdjust = 1f;  // 調整用.
-		public const float GenTimeDifference = 0.6f;	// ブロック連続生成の時間差.
+		public const float GenTimeDifference = 0.7f;    // ブロック連続生成の時間差.
 
 		protected override void OnUpdate()
 		{
