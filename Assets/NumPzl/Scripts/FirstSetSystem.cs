@@ -22,14 +22,11 @@ namespace NumPzl
 			Entity blkEntity = Entity.Null;
 			if( isGenerate ) {
 				var env = World.TinyEnvironment();
-				SceneReference blockBase = new SceneReference();
-
-				blockBase = env.GetConfigData<GameConfig>().PrefabBlockStay;
-
-				//blkEntity = SceneService.LoadSceneAsync( blockBase );
+				//SceneReference blockBase = new SceneReference();
+				//blockBase = env.GetConfigData<GameConfig>().PrefabBlockStay;
 
 				for( int i = 0; i < FirstBlockNum; ++i ) {
-					SceneService.LoadSceneAsync( blockBase );
+					SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabBlockStay );
 				}
 			}
 

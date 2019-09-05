@@ -84,6 +84,10 @@ namespace NumPzl
 		// 生成するブロックの数.
 		void CheckGenerateNum( ref GeneratorInfo info, float gameTime )
 		{
+			if( gameTime > 80f ) {
+				if( info.GenerateNum == 4 )
+					++info.GenerateNum;
+			}
 			if( gameTime > 60f ) {
 				if( info.GenerateNum == 3 )
 					++info.GenerateNum;

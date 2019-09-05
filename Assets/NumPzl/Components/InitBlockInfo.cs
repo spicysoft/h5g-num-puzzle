@@ -5,6 +5,6 @@ namespace NumPzl
 	public struct InitBlockInfo : IComponentData
 	{
 		public bool Initialized;
-		public int PreIdx;
+		public int PreIdx;			// 前回セットしたインデックス(落ちるブロック用).
 	}
 }

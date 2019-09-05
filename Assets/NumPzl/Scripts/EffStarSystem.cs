@@ -19,13 +19,11 @@ namespace NumPzl
 
 			Entities.ForEach( ( Entity entity, ref EffStarInfo eff, ref Sprite2DSequencePlayer seq ) => {
 				if( !eff.Initialized ) {
-					//eff.Initialized = true;
-
 					return;
 				}
 
 				eff.Timer += World.TinyEnvironment().frameDeltaTime;
-				if( eff.Timer > 0.8f ) {
+				if( eff.Timer > 0.8f ) {	// とりあえず時間で判定.
 					delAry[delCnt++] = entity;
 				}
 
@@ -39,7 +37,6 @@ namespace NumPzl
 			for( int i = 0; i < delCnt; ++i ) {
 				if( delAry[i] != Entity.Null ) {
 					// エンティティ削除.
-					Debug.LogAlways("eff del");
 					SceneService.UnloadSceneInstance( delAry[i] );
 				}
 			}

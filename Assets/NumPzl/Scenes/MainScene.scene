@@ -3,8 +3,7 @@
     "Guid": "cecb262ea6464928bc6b08b33c6f9f37",
     "SerializedVersion": 1,
     "AssetReferences": [
-        { "Guid": "04caaa0ed4da34cd3b899f6e48d9d13d", "FileId": 11400000, "Type": 2},
-        { "Guid": "f3a1455a4cab64de3a97b92d3118eeea", "FileId": 21300000, "Type": 3},
+        { "Guid": "2acd61d1f33a246048b168400660b2c7", "FileId": 11400000, "Type": 2},
         { "Guid": "18690063241484434a979adce88a2cd0", "FileId": 21300000, "Type": 3}],
     "Entities": [{
         "Components": [{
@@ -369,7 +368,7 @@
     }, {
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
-            "font": "6bf8c3a6ccb750b5a1e4c155962556b4"
+            "font": "63f624bbe79541d032046d2c86dd444a"
         }, {
             "$type": "Unity.Tiny.Text.Text2DRenderer, Unity.Tiny.Text",
             "style": "4edf1d62cd0144a28b7714dc7076ca2a",
@@ -500,14 +499,17 @@
                 "StableTypeHash": 17649336122499667438
             }, {
                 "StableTypeHash": 16791256614846730296
+            }, {
+                "StableTypeHash": 8144720687316769559
             }]
+        }, {
+            "$type": "Unity.Entities.Disabled, Unity.Entities"
         }]
     }, {
         "Components": [{
             "$type": "Unity.Tiny.Core2D.Parent, Unity.Tiny.Core2D"
         }, {
             "$type": "Unity.Tiny.Core2D.Sprite2DRenderer, Unity.Tiny.Sprite2D",
-            "sprite": "7a4efc8a89ac571c19fc5c2268baa354",
             "color": {
                 "r": 0.254717,
                 "g": 0.254717,
@@ -611,7 +613,7 @@
     }, {
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
-            "font": "6bf8c3a6ccb750b5a1e4c155962556b4"
+            "font": "63f624bbe79541d032046d2c86dd444a"
         }, {
             "$type": "Unity.Tiny.Text.Text2DRenderer, Unity.Tiny.Text",
             "style": "5234bb8be7a743118685ed3f2532cbda",
@@ -865,7 +867,7 @@
     }, {
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
-            "font": "6bf8c3a6ccb750b5a1e4c155962556b4"
+            "font": "63f624bbe79541d032046d2c86dd444a"
         }, {
             "$type": "Unity.Tiny.Text.Text2DRenderer, Unity.Tiny.Text",
             "style": "c333e5a3c21c441c80e74ab3d45b1b3a",
@@ -1000,7 +1002,7 @@
     }, {
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
-            "font": "6bf8c3a6ccb750b5a1e4c155962556b4"
+            "font": "63f624bbe79541d032046d2c86dd444a"
         }, {
             "$type": "Unity.Tiny.Text.Text2DRenderer, Unity.Tiny.Text",
             "style": "fe3311ef62d5478796e507fd12b7717e",
@@ -1128,9 +1130,13 @@
                 "StableTypeHash": 16791256614846730296
             }, {
                 "StableTypeHash": 8857573896646704015
+            }, {
+                "StableTypeHash": 8144720687316769559
             }]
         }, {
             "$type": "NumPzl.TextTimerTag, NumPzl"
+        }, {
+            "$type": "Unity.Entities.Disabled, Unity.Entities"
         }]
     }]
 }

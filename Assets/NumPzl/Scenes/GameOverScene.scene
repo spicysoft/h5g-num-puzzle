@@ -3,11 +3,11 @@
     "Guid": "90f2c4ecb95b4c708f960021f690b051",
     "SerializedVersion": 1,
     "AssetReferences": [
-        { "Guid": "04caaa0ed4da34cd3b899f6e48d9d13d", "FileId": 11400000, "Type": 2}],
+        { "Guid": "2acd61d1f33a246048b168400660b2c7", "FileId": 11400000, "Type": 2}],
     "Entities": [{
         "Components": [{
             "$type": "Unity.Tiny.Text.Text2DStyleBitmapFont, Unity.Tiny.Text",
-            "font": "6bf8c3a6ccb750b5a1e4c155962556b4"
+            "font": "63f624bbe79541d032046d2c86dd444a"
         }, {
             "$type": "Unity.Tiny.Text.Text2DRenderer, Unity.Tiny.Text",
             "style": "0fcd1baab91442be924794b77dcc49c3",
@@ -243,6 +243,140 @@
                 "StableTypeHash": 874803706151837934
             }, {
                 "StableTypeHash": 11301794271907081408
+            }]
+        }]
+    }, {
+        "Components": [{
+            "$type": "Unity.Tiny.Core2D.Parent, Unity.Tiny.Core2D"
+        }, {
+            "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core",
+            "Index": 1
+        }, {
+            "$type": "Unity.Entities.EntityGuid, Unity.Entities",
+            "a": 15303158726900600807,
+            "b": 11394324592485935713
+        }, {
+            "$type": "Unity.Tiny.Core2D.Translation, Unity.Tiny.Core2D",
+            "Value": {}
+        }, {
+            "$type": "Unity.Tiny.Core2D.Rotation, Unity.Tiny.Core2D",
+            "Value": {
+                "value": {
+                    "w": 1
+                }
+            }
+        }, {
+            "$type": "Unity.Tiny.Core2D.NonUniformScale, Unity.Tiny.Core2D",
+            "Value": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        }, {
+            "$type": "Unity.Tiny.Core.EntityName, Unity.Tiny.Core",
+            "Elements": [{
+                "c": "T"
+            }, {
+                "c": "M"
+            }, {
+                "c": "P"
+            }, {
+                "c": " "
+            }, {
+                "c": "S"
+            }, {
+                "c": "u"
+            }, {
+                "c": "b"
+            }, {
+                "c": "M"
+            }, {
+                "c": "e"
+            }, {
+                "c": "s"
+            }, {
+                "c": "h"
+            }, {
+                "c": "U"
+            }, {
+                "c": "I"
+            }, {
+                "c": " "
+            }, {
+                "c": "["
+            }, {
+                "c": "L"
+            }, {
+                "c": "i"
+            }, {
+                "c": "b"
+            }, {
+                "c": "e"
+            }, {
+                "c": "r"
+            }, {
+                "c": "a"
+            }, {
+                "c": "t"
+            }, {
+                "c": "i"
+            }, {
+                "c": "o"
+            }, {
+                "c": "n"
+            }, {
+                "c": "S"
+            }, {
+                "c": "a"
+            }, {
+                "c": "n"
+            }, {
+                "c": "s"
+            }, {
+                "c": " "
+            }, {
+                "c": "S"
+            }, {
+                "c": "D"
+            }, {
+                "c": "F"
+            }, {
+                "c": " "
+            }, {
+                "c": "M"
+            }, {
+                "c": "a"
+            }, {
+                "c": "t"
+            }, {
+                "c": "e"
+            }, {
+                "c": "r"
+            }, {
+                "c": "i"
+            }, {
+                "c": "a"
+            }, {
+                "c": "l"
+            }, {
+                "c": "]"
+            }]
+        }, {
+            "$type": "Unity.Authoring.Core.ComponentOrder, Unity.Authoring.Core",
+            "Elements": [{
+                "StableTypeHash": 7960064150805274675
+            }, {
+                "StableTypeHash": 793987765392955020
+            }, {
+                "StableTypeHash": 12662904853204722592
+            }, {
+                "StableTypeHash": 266869500686333426
+            }, {
+                "StableTypeHash": 9104342357061045742
+            }, {
+                "StableTypeHash": 17378348762221180850
+            }, {
+                "StableTypeHash": 874803706151837934
             }]
         }]
     }, {

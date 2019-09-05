@@ -37,10 +37,10 @@ namespace NumPzl
 			}
 #endif
 
-			float timer = 0;
+			//float timer = 0;
 			int score = 0;
 			//bool isEnd = false;
-			bool isPause = false;
+			//bool isPause = false;
 			bool reqGameOver = false;
 			bool reqResult = false;
 
@@ -72,7 +72,7 @@ namespace NumPzl
 
 
 				if( mngr.IsPause ) {
-					isPause = true;
+					//isPause = true;
 					return;
 				}
 
@@ -81,25 +81,16 @@ namespace NumPzl
 
 				// タイマー.
 				mngr.GameTimer += dt;
+#if false
 				timer = mngr.GameTimer;
 				if( timer >= GameTimeLimit ) {
-					//isEnd = true;
-					//mngr.GameTimer = 0;
 					mngr.IsPause = true;
 				}
+#endif
 			} );
 
 
 #if false
-			if( isEnd ) {
-				// リザルト表示.
-				SceneReference panelBase = new SceneReference();
-				panelBase = World.TinyEnvironment().GetConfigData<PanelConfig>().ResultScn;
-				SceneService.LoadSceneAsync( panelBase );
-			}
-#endif
-
-#if true
 			// タイマー表示.
 			if( !isPause ) {
 				Entities.WithAll<TextTimerTag>().ForEach( ( Entity entity ) => {
