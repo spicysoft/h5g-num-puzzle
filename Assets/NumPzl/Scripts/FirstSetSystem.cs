@@ -7,7 +7,9 @@ namespace NumPzl
 {
 	public class FirstSetSystem : ComponentSystem
 	{
+		// 初期配置数.
 		public const int FirstBlockNum = 6;
+
 		protected override void OnUpdate()
 		{
 			bool isGenerate = false;
@@ -19,12 +21,10 @@ namespace NumPzl
 			} );
 
 
-			Entity blkEntity = Entity.Null;
+			//Entity blkEntity = Entity.Null;
 			if( isGenerate ) {
+				// 初期配置ブロック生成.
 				var env = World.TinyEnvironment();
-				//SceneReference blockBase = new SceneReference();
-				//blockBase = env.GetConfigData<GameConfig>().PrefabBlockStay;
-
 				for( int i = 0; i < FirstBlockNum; ++i ) {
 					SceneService.LoadSceneAsync( env.GetConfigData<GameConfig>().PrefabBlockStay );
 				}

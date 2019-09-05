@@ -23,11 +23,9 @@
             "$type": "Unity.Tiny.Text.Text2DStyle, Unity.Tiny.Text",
             "color": {
                 "r": 1,
-                "g": 1,
-                "b": 1,
                 "a": 1
             },
-            "size": 46
+            "size": 48
         }, {
             "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core",
             "Index": 1
@@ -243,140 +241,6 @@
                 "StableTypeHash": 874803706151837934
             }, {
                 "StableTypeHash": 11301794271907081408
-            }]
-        }]
-    }, {
-        "Components": [{
-            "$type": "Unity.Tiny.Core2D.Parent, Unity.Tiny.Core2D"
-        }, {
-            "$type": "Unity.Authoring.Core.SiblingIndex, Unity.Authoring.Core",
-            "Index": 1
-        }, {
-            "$type": "Unity.Entities.EntityGuid, Unity.Entities",
-            "a": 15303158726900600807,
-            "b": 11394324592485935713
-        }, {
-            "$type": "Unity.Tiny.Core2D.Translation, Unity.Tiny.Core2D",
-            "Value": {}
-        }, {
-            "$type": "Unity.Tiny.Core2D.Rotation, Unity.Tiny.Core2D",
-            "Value": {
-                "value": {
-                    "w": 1
-                }
-            }
-        }, {
-            "$type": "Unity.Tiny.Core2D.NonUniformScale, Unity.Tiny.Core2D",
-            "Value": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            }
-        }, {
-            "$type": "Unity.Tiny.Core.EntityName, Unity.Tiny.Core",
-            "Elements": [{
-                "c": "T"
-            }, {
-                "c": "M"
-            }, {
-                "c": "P"
-            }, {
-                "c": " "
-            }, {
-                "c": "S"
-            }, {
-                "c": "u"
-            }, {
-                "c": "b"
-            }, {
-                "c": "M"
-            }, {
-                "c": "e"
-            }, {
-                "c": "s"
-            }, {
-                "c": "h"
-            }, {
-                "c": "U"
-            }, {
-                "c": "I"
-            }, {
-                "c": " "
-            }, {
-                "c": "["
-            }, {
-                "c": "L"
-            }, {
-                "c": "i"
-            }, {
-                "c": "b"
-            }, {
-                "c": "e"
-            }, {
-                "c": "r"
-            }, {
-                "c": "a"
-            }, {
-                "c": "t"
-            }, {
-                "c": "i"
-            }, {
-                "c": "o"
-            }, {
-                "c": "n"
-            }, {
-                "c": "S"
-            }, {
-                "c": "a"
-            }, {
-                "c": "n"
-            }, {
-                "c": "s"
-            }, {
-                "c": " "
-            }, {
-                "c": "S"
-            }, {
-                "c": "D"
-            }, {
-                "c": "F"
-            }, {
-                "c": " "
-            }, {
-                "c": "M"
-            }, {
-                "c": "a"
-            }, {
-                "c": "t"
-            }, {
-                "c": "e"
-            }, {
-                "c": "r"
-            }, {
-                "c": "i"
-            }, {
-                "c": "a"
-            }, {
-                "c": "l"
-            }, {
-                "c": "]"
-            }]
-        }, {
-            "$type": "Unity.Authoring.Core.ComponentOrder, Unity.Authoring.Core",
-            "Elements": [{
-                "StableTypeHash": 7960064150805274675
-            }, {
-                "StableTypeHash": 793987765392955020
-            }, {
-                "StableTypeHash": 12662904853204722592
-            }, {
-                "StableTypeHash": 266869500686333426
-            }, {
-                "StableTypeHash": 9104342357061045742
-            }, {
-                "StableTypeHash": 17378348762221180850
-            }, {
-                "StableTypeHash": 874803706151837934
             }]
         }]
     }, {

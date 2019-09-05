@@ -34,7 +34,8 @@ namespace NumPzl
 					if( !info.Initialized ) {
 						// 初期化.
 						info.Initialized = true;
-						info.IntvlTime = IntervalTime;
+						//info.IntvlTime = IntervalTime;
+						info.IntvlTime = GetInterval( gameTime );
 						info.GenerateNum = 1;
 						info.Timer = TimeForAdjust;
 						info.GenCnt = 0;
@@ -52,6 +53,9 @@ namespace NumPzl
 							info.GenCnt = 0;
 							CheckGenerateNum( ref info, gameTime );
 							genNum = info.GenerateNum;
+							// インターバル更新.
+							info.IntvlTime = GetInterval( gameTime );
+							Debug.LogFormatAlways("intvl {0}", info.IntvlTime);
 						}
 					}
 					else if( info.Status == StGenerate ) {
@@ -102,5 +106,18 @@ namespace NumPzl
 			}
 		}
 
+		// インターバル.
+		float GetInterval( float gameTime )
+		{
+			float intvl = 3.5f;
+
+			float t = gameTime / 10f;
+			intvl -= t * 0.3f;
+
+			if( intvl < 2f )
+				intvl = 2f;
+
+			return intvl;
+		}
 	}
 }

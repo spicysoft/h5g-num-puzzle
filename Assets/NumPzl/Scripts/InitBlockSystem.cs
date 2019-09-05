@@ -42,11 +42,13 @@ namespace NumPzl
 			} );
 
 			if( !isInitialized ) {
+				// ブロック数.
 				int blkNum = 0;
 				Entities.ForEach( ( Entity entity, ref BlockInfo block ) => {
 					++blkNum;
 				} );
 
+				// ブロック生成待ち.
 				if( blkNum < FirstSetSystem.FirstBlockNum ) {
 					return;
 				}
@@ -57,7 +59,7 @@ namespace NumPzl
 
 				// 乱数シードセット.
 				uint val = (uint)(World.TinyEnvironment().frameTime * 1000f);
-				Debug.LogFormatAlways( "seed {0}", (int)val);
+				//Debug.LogFormatAlways( "seed {0}", (int)val);
 				_random.InitState( val );
 			}
 
