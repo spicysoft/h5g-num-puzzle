@@ -115,6 +115,13 @@ namespace NumPzl
 				SceneReference panelBase = new SceneReference();
 				panelBase = World.TinyEnvironment().GetConfigData<GameConfig>().GameOverScn;
 				SceneService.LoadSceneAsync( panelBase );
+
+				// ブロック削除.
+				var env = World.TinyEnvironment();
+				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlock );
+				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlockStay );
+				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabStar );
+
 			}
 
 		}

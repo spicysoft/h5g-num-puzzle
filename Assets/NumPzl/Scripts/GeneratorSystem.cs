@@ -22,7 +22,7 @@ namespace NumPzl
 			bool isRequest = false;
 			bool isPause = false;
 			float gameTime = 0;
-			int genNum = 0;
+
 			Entities.ForEach( ( ref GameMngr mngr ) => {
 				gameTime = mngr.GameTimer;
 				isPause = mngr.IsPause;
@@ -52,10 +52,8 @@ namespace NumPzl
 							info.Status = StGenerate;
 							info.GenCnt = 0;
 							CheckGenerateNum( ref info, gameTime );
-							genNum = info.GenerateNum;
 							// インターバル更新.
 							info.IntvlTime = GetInterval( gameTime );
-							Debug.LogFormatAlways("intvl {0}", info.IntvlTime);
 						}
 					}
 					else if( info.Status == StGenerate ) {
@@ -66,6 +64,7 @@ namespace NumPzl
 								isRequest = true;
 								info.TimeDifference = GenTimeDifference;
 								if( ++info.GenCnt >= info.GenerateNum ) {
+									// 終了
 									info.Status = StNorm;
 									info.GenCnt = 0;
 								}
@@ -88,15 +87,15 @@ namespace NumPzl
 		// 生成するブロックの数.
 		void CheckGenerateNum( ref GeneratorInfo info, float gameTime )
 		{
-			if( gameTime > 80f ) {
+			/*if( gameTime > 80f ) {
 				if( info.GenerateNum == 4 )
 					++info.GenerateNum;
-			}
+			}*/
 			if( gameTime > 60f ) {
 				if( info.GenerateNum == 3 )
 					++info.GenerateNum;
 			}
-			if( gameTime > 40f ) {
+			else if( gameTime > 40f ) {
 				if( info.GenerateNum == 2 )
 					++info.GenerateNum;
 			}

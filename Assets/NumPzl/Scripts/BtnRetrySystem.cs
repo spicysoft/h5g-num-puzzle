@@ -23,9 +23,9 @@ namespace NumPzl
 
 			if( btnOn ) {
 				var env = World.TinyEnvironment();
-				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlock );
+				/*SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlock );
 				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabBlockStay );
-				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabStar );
+				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().PrefabStar );*/
 
 				SceneService.UnloadAllSceneInstances( env.GetConfigData<GameConfig>().ResultScn );
 
